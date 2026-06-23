@@ -1,0 +1,15 @@
+{
+  "name": "certiscan",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QR-based course certificate completion verifier",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4"
+  }
+}

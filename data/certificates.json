@@ -1,0 +1,43 @@
+[
+  {
+    "certificateId": "CERT-2026-08421",
+    "verificationCode": "vf_8xp3Qm2L",
+    "learnerName": "Ananya Rao",
+    "courseName": "Applied Artificial Intelligence",
+    "issuer": "Northstar Learning Institute",
+    "status": "completed",
+    "progress": 100,
+    "completedOn": "2026-05-18",
+    "issuedOn": "2026-05-20",
+    "credential": "NSLI-AAI-2026",
+    "skills": ["Machine Learning", "Neural Networks", "Responsible AI"]
+  },
+  {
+    "certificateId": "CERT-2026-07304",
+    "verificationCode": "vf_4nk7Hs9P",
+    "learnerName": "Rohan Mehta",
+    "courseName": "Full-Stack Web Development",
+    "issuer": "Northstar Learning Institute",
+    "status": "in_progress",
+    "progress": 72,
+    "issuedOn": null,
+    "completedOn": null,
+    "credential": "NSLI-FSW-2026",
+    "skills": ["JavaScript", "Node.js", "Databases"]
+  },
+  {
+    "certificateId": "CERT-2025-01987",
+    "verificationCode": "vf_2cw6Rt1A",
+    "learnerName": "Maya Singh",
+    "courseName": "Cloud Security Foundations",
+    "issuer": "Northstar Learning Institute",
+    "status": "revoked",
+    "progress": 100,
+    "completedOn": "2025-11-02",
+    "issuedOn": "2025-11-04",
+    "revokedOn": "2026-01-15",
+    "revocationReason": "Credential issued in error",
+    "credential": "NSLI-CSF-2025",
+    "skills": ["IAM", "Network Security", "Cloud Governance"]
+  }
+]

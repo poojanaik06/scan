@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f1e8" />
+    <title>CertiScan — Certificate Verification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/vendor/jsQR.js" defer></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="CertiScan home">
+        <span class="brand-mark" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </span>
+        <span>Certi<span>Scan</span></span>
+      </a>
+      <div class="secure-pill"><span></span> Issuer registry connected</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span>01</span> Credential verification</div>
+        <h1>Proof, not<br /><em>promises.</em></h1>
+        <p>Scan a certificate’s QR code to confirm the credential exists and the learner actually completed the course.</p>
+        <div class="trust-row">
+          <div><strong>3-step</strong><span>registry check</span></div>
+          <div><strong>&lt; 2 sec</strong><span>verification</span></div>
+          <div><strong>Live</strong><span>course status</span></div>
+        </div>
+      </section>
+
+      <section class="verifier-card" aria-labelledby="verify-title">
+        <div class="card-heading">
+          <div>
+            <span class="step-label">Verify a credential</span>
+            <h2 id="verify-title">Scan certificate QR</h2>
+          </div>
+          <div class="status-dot" title="Service available"></div>
+        </div>
+
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="scan" role="tab" aria-selected="true">Scan QR</button>
+          <button class="tab" data-tab="upload" role="tab" aria-selected="false">Upload image</button>
+          <button class="tab" data-tab="manual" role="tab" aria-selected="false">Enter ID</button>
+        </div>
+
+        <div class="panel active" id="scan-panel" role="tabpanel">
+          <div class="scanner-shell">
+            <video id="camera" playsinline muted></video>
+            <canvas id="scan-canvas" hidden></canvas>
+            <div class="camera-placeholder" id="camera-placeholder">
+              <div class="qr-symbol" aria-hidden="true">
+                <i></i><i></i><i></i><b></b>
+              </div>
+              <strong>Camera ready when you are</strong>
+              <span>Position the QR code inside the frame</span>
+            </div>
+            <div class="scan-frame" aria-hidden="true"><span></span></div>
+          </div>
+          <button class="primary-button" id="camera-button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l1.5-2h7L17 7h3v12H4V7Zm8 9.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>
+            Start camera
+          </button>
+          <p class="privacy-note">Camera access stays on your device. No video is stored.</p>
+        </div>
+
+        <div class="panel" id="upload-panel" role="tabpanel">
+          <label class="upload-zone" id="upload-zone">
+            <input type="file" id="file-input" accept="image/*" />
+            <span class="upload-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v5h14v-5"/></svg>
+            </span>
+            <strong>Drop a QR image here</strong>
+            <span>or click to choose a PNG, JPG, or screenshot</span>
+          </label>
+        </div>
+
+        <div class="panel" id="manual-panel" role="tabpanel">
+          <form id="manual-form" class="manual-form">
+            <label for="certificate-id">Certificate ID</label>
+            <div class="input-row">
+              <input id="certificate-id" name="certificateId" placeholder="e.g. CERT-2026-08421" autocomplete="off" />
+              <button class="primary-button" type="submit">Verify</button>
+            </div>
+            <p>Find the ID below the QR code on the certificate.</p>
+          </form>
+        </div>
+
+        <div class="message" id="message" aria-live="polite"></div>
+      </section>
+
+      <section class="result-card" id="result-card" hidden aria-live="polite">
+        <div class="result-banner">
+          <div class="result-icon" id="result-icon"></div>
+          <div>
+            <span id="result-kicker">Registry result</span>
+            <h2 id="result-title"></h2>
+            <p id="result-message"></p>
+          </div>
+          <button id="close-result" aria-label="Close result">×</button>
+        </div>
+        <div class="certificate-details" id="certificate-details"></div>
+        <div class="result-footer">
+          <span id="checked-time"></span>
+          <button id="verify-another">Verify another</button>
+        </div>
+      </section>
+
+      <section class="how-it-works">
+        <div class="section-heading">
+          <span>How it works</span>
+          <h2>A QR code starts the check.<br />The registry settles it.</h2>
+        </div>
+        <div class="steps">
+          <article><span>01</span><h3>Read the QR</h3><p>We extract the certificate ID and its private verification token.</p></article>
+          <article><span>02</span><h3>Check the issuer</h3><p>The ID is matched against the organization’s trusted registry.</p></article>
+          <article><span>03</span><h3>Confirm completion</h3><p>The current course status is returned: completed, incomplete, or revoked.</p></article>
+        </div>
+      </section>
+
+      <section class="demo-strip">
+        <div><span>Try the demo</span><strong>Use a sample credential</strong></div>
+        <a href="/api/certificates/CERT-2026-08421/qr" target="_blank">Open sample QR <span>↗</span></a>
+        <button class="demo-id" data-id="CERT-2026-08421">Verified ID</button>
+        <button class="demo-id" data-id="CERT-2026-07304">Incomplete ID</button>
+        <button class="demo-id" data-id="CERT-2025-01987">Revoked ID</button>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand compact" href="/"><span class="brand-mark"><span></span><span></span><span></span><span></span></span><span>Certi<span>Scan</span></span></a>
+      <p>Verification reflects the issuer registry at the moment of checking.</p>
+    </footer>
+  </body>
+</html>

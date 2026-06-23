@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Verify course completion certificates by scanning their QR code."
+    />
+    <title>CertiScan — Certificate verification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="CertiScan home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32">
+            <path d="M8 4H5a1 1 0 0 0-1 1v3M24 4h3a1 1 0 0 1 1 1v3M8 28H5a1 1 0 0 1-1-1v-3M24 28h3a1 1 0 0 0 1-1v-3" />
+            <path d="m10 16 4 4 8-9" />
+          </svg>
+        </span>
+        <span>Certi<span>Scan</span></span>
+      </a>
+      <div class="header-badge"><span></span> Issuer registry online</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">INSTANT • SECURE • TRUSTED</div>
+        <h1>Know if a certificate<br /><em>really counts.</em></h1>
+        <p>
+          Scan the QR code on any course certificate. We check it directly
+          against the issuer’s completion records.
+        </p>
+      </section>
+
+      <section class="verifier-card" aria-labelledby="verifier-title">
+        <div class="card-heading">
+          <div>
+            <span class="step">01</span>
+            <h2 id="verifier-title">Verify a certificate</h2>
+          </div>
+          <span class="privacy-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3M5 10h14v11H5z" /></svg>
+            Private & secure
+          </span>
+        </div>
+
+        <div class="scanner-shell" id="scannerShell">
+          <video id="camera" playsinline muted></video>
+          <div class="scan-frame" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <i></i>
+          </div>
+          <div class="scanner-placeholder" id="scannerPlaceholder">
+            <div class="qr-illustration" aria-hidden="true">
+              <svg viewBox="0 0 80 80">
+                <path d="M8 8h24v24H8zM14 14h12v12H14zM48 8h24v24H48zM54 14h12v12H54zM8 48h24v24H8zM14 54h12v12H14zM46 46h10v10H46zM62 46h10v18H62zM46 62h10v10H46zM60 68h12v4H60z" />
+              </svg>
+            </div>
+            <strong>Position the QR code inside the frame</strong>
+            <span>Your camera will open when you tap scan</span>
+          </div>
+          <button class="stop-camera" id="stopCamera" type="button">Stop camera</button>
+        </div>
+
+        <div class="primary-actions">
+          <button class="button button-primary" id="startCamera" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h4l2-3h4l2 3h4v13H4z" /><circle cx="12" cy="13" r="4" /></svg>
+            Scan with camera
+          </button>
+          <label class="button button-secondary" for="qrUpload">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m-5 5 5-5 5 5M5 14v6h14v-6" /></svg>
+            Upload QR image
+          </label>
+          <input id="qrUpload" type="file" accept="image/*" hidden />
+        </div>
+
+        <div class="divider"><span>or enter the code manually</span></div>
+
+        <form id="verifyForm" class="manual-form">
+          <label for="certificateId">Certificate ID</label>
+          <div class="input-row">
+            <input
+              id="certificateId"
+              name="certificateId"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="e.g. CERT-2026-A7K9Q2"
+              required
+            />
+            <button class="button button-dark" type="submit">Verify now</button>
+          </div>
+          <p class="form-hint" id="formHint">
+            Try demo IDs:
+            <button type="button" data-demo-id="CERT-2026-A7K9Q2">completed</button>,
+            <button type="button" data-demo-id="CERT-2026-P4M8X1">in progress</button>, or
+            <button type="button" data-demo-id="CERT-2025-R3V6N0">revoked</button>.
+          </p>
+        </form>
+
+        <div class="message" id="message" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="result-card" id="resultCard" aria-live="polite"></section>
+
+      <section class="trust-strip" aria-label="Verification benefits">
+        <article>
+          <span>✓</span>
+          <div><strong>Issuer-verified</strong><small>Checked against source records</small></div>
+        </article>
+        <article>
+          <span>⌁</span>
+          <div><strong>Tamper-resistant</strong><small>QR and record must match</small></div>
+        </article>
+        <article>
+          <span>⚡</span>
+          <div><strong>Instant result</strong><small>No calls or paperwork</small></div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 CertiScan</span>
+      <span>Verification you can trust.</span>
+    </footer>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
