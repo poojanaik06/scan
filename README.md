@@ -13,7 +13,6 @@ npm test
 npm run dev
 ```
 
-Open <http://localhost:3000>.
 
 The demo includes verified, incomplete, and revoked records. Click **Open sample
 QR**, save or display the QR, and scan it with the camera or image uploader.
